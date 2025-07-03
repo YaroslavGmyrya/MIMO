@@ -1,12 +1,16 @@
 #include "header.hpp"
 
 int main(){
-    const std::vector<double> snr_db_list{-1.0, -0.5, 
-                                          0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0
-                                        };
-    const int NUM_BITS = 512;
+    std::vector<double> snr_db_list;
+    snr_db_list.reserve(100);
+
+    const int SNR_NUM = 14;
+    const int NUM_BITS = 32;
     const int N_EXP = 1000;
-    double ber;
+    double real_ber, theory_ber;
+
+    for(double snr = 0; snr < SNR_NUM; snr += 0.5)
+        snr_db_list.push_back(snr);
 
     std::vector<std::vector<std::complex<double>>> chanel_matrix;
     std::vector<int> transmitted;
@@ -17,7 +21,7 @@ int main(){
 
 
     for(double snr_db : snr_db_list){
-        ber = 0;
+        real_ber = 0;
         for(int i = 0; i < N_EXP; i++){
             chanel_matrix = generate_chanel_matrix();
             transmitted = generate_bit_vector(NUM_BITS);
@@ -25,11 +29,12 @@ int main(){
             mimo_symbols = mimo_chanel(modulated_symbols, chanel_matrix, snr_db);
             mimo_zf = zf_equalizer(mimo_symbols, chanel_matrix);
             recieved = bpsk_demodulate(mimo_zf);
-            ber += calculate_ber(transmitted, recieved);
+            real_ber += calculate_ber(transmitted, recieved);
         }
 
-        ber /= N_EXP;
+        real_ber /= N_EXP;
+        theory_ber  = fabs(1 / (4 * snr_db));
 
-        std::cout << "SNR in db = " << snr_db << ": BER = " << ber << '\n';
+        std::cout << "SNR in db = " << snr_db << ": Real BER = " << real_ber << " Theory BER = " << theory_ber <<'\n';
     }
 }
