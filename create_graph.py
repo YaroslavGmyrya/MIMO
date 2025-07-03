@@ -25,7 +25,6 @@ def main():
         for line in file:
             words = line.strip().replace(":", "").split(" ")
             numbers = [float(word) for word in words if is_number(word)]
-            print(numbers)
 
             if len(numbers) >= 3:
                 snr_db.append(numbers[0])
