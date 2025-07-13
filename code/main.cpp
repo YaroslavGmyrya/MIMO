@@ -1,11 +1,11 @@
-#include "header.hpp"
+#include "../includes/header.hpp"
 
 int main(){
     std::vector<double> snr_db_list;
     snr_db_list.reserve(20);
 
-    const int NUM_BITS = 128;
-    const int N_EXP = 2000;
+    const int NUM_BITS = 32;
+    const int N_EXP = 200;
     double real_ber, theory_ber;
 
     for(double snr = 0; snr < 14; snr += 0.2)

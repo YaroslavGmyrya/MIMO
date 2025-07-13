@@ -1,8 +1,19 @@
+OUTPUT_FILE_BIN = main.out
+OUTPUT_TEST_FILE = test_result.txt
+GXX = g++
+
 all:
-	g++ -g *.cpp -o main.out
+	@cd code && \
+	$(GXX) *.cpp -o $(OUTPUT_FILE_BIN) && \
+	printf "\n ===== Compilation completed successfully ===== \n\n"
 
 run:
-	./main.out > test_result.txt
+	@./$(OUTPUT_FILE_BIN)
+
+test:
+	@cd code && \
+	./$(OUTPUT_FILE_BIN) > ../tests/$(OUTPUT_TEST_FILE)
 
 graph:
-	python3 create_graph.py test_result.txt
+	@cd tests && \
+	python3 create_graph.py $(OUTPUT_TEST_FILE)
