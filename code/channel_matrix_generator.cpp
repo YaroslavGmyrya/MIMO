@@ -15,16 +15,16 @@ std::complex<double> generate_channel_coef(){
     return std::complex<double>(dist(gen), dist(gen));
 }
 
-std::vector<std::vector<std::complex<double>>> generate_chanel_matrix(){
+std::vector<std::vector<std::complex<double>>> generate_channel_matrix(){
 
-    std::vector<std::vector<std::complex<double>>> chanel_matrix(2, std::vector<std::complex<double>>(2));
+    std::vector<std::vector<std::complex<double>>> channel_matrix(2, std::vector<std::complex<double>>(2));
 
-    for(std::vector<std::complex<double>>& row : chanel_matrix){
+    for(std::vector<std::complex<double>>& row : channel_matrix){
         for(std::complex<double>& el : row){
             el = generate_channel_coef();
         }
     }
 
-    return chanel_matrix;
+    return channel_matrix;
 
 }

@@ -17,10 +17,10 @@ std::vector<int> bpsk_demodulate (const std::vector<std::complex<double>> &recei
 
 std::complex<double> generate_channel_coef();
 
-std::vector<std::vector<std::complex<double>>> generate_chanel_matrix();
+std::vector<std::vector<std::complex<double>>> generate_channel_matrix();
 
-std::vector<std::complex<double>> mimo_chanel(const std::vector<std::complex<double>>& symbols, 
-const std::vector<std::vector<std::complex<double>>>& chanel_matrix, double snr_db = 0);
+std::vector<std::complex<double>> mimo_channel(const std::vector<std::complex<double>>& symbols, 
+const std::vector<std::vector<std::complex<double>>>& channel_matrix, double snr_db = 0);
 
 std::vector<std::complex<double>> zf_equalizer(const std::vector<std::complex<double>>& mimo_symbols, 
-const std::vector<std::vector<std::complex<double>>>& chanel_matrix);
+const std::vector<std::vector<std::complex<double>>>& channel_matrix);

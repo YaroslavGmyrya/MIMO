@@ -8,7 +8,8 @@ all:
 	printf "\n ===== Compilation completed successfully ===== \n\n"
 
 run:
-	@./$(OUTPUT_FILE_BIN)
+	@cd code && \
+	./$(OUTPUT_FILE_BIN)
 
 test:
 	@cd code && \

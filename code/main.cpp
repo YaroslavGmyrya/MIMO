@@ -11,7 +11,7 @@ int main(){
     for(double snr = 0; snr < 14; snr += 0.2)
         snr_db_list.push_back(snr);
 
-    std::vector<std::vector<std::complex<double>>> chanel_matrix;
+    std::vector<std::vector<std::complex<double>>> channel_matrix;
     std::vector<int> transmitted;
     std::vector<std::complex<double>> modulated_symbols;
     std::vector<std::complex<double>> mimo_symbols;
@@ -22,11 +22,11 @@ int main(){
     for(double snr_db : snr_db_list){
         real_ber = 0;
         for(int i = 0; i < N_EXP; i++){
-            chanel_matrix = generate_chanel_matrix();
+            channel_matrix = generate_channel_matrix();
             transmitted = generate_bit_vector(NUM_BITS);
             modulated_symbols = bpsk_modulate(transmitted);
-            mimo_symbols = mimo_chanel(modulated_symbols, chanel_matrix, snr_db);
-            mimo_zf = zf_equalizer(mimo_symbols, chanel_matrix);
+            mimo_symbols = mimo_channel(modulated_symbols, channel_matrix, snr_db);
+            mimo_zf = zf_equalizer(mimo_symbols, channel_matrix);
             recieved = bpsk_demodulate(mimo_zf);
             real_ber += calculate_ber(transmitted, recieved);
         }

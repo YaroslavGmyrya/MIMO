@@ -1,4 +1,4 @@
-main.out
-test_result.txt
+*.out
+*.txt
 .vscode
 *.png
